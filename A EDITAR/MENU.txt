@@ -1,0 +1,56 @@
+@echo off
+color 0A
+title CAMBIAR MENU CONTEXTUAL WIN 11
+:menu
+cls
+echo.
+echo  =============================================
+echo  |                                           |
+echo  |       CAMBIAR MENU CONTEXTUAL WIN 11      |
+echo  |                                           |
+echo  =============================================
+echo.
+echo  [1] MENU CLASICO (Windows 10)
+echo  [2] MENU WIN 11 (Windows 11)
+echo.
+set /p opcion="Seleccione una opcion (1 o 2): "
+
+if "%opcion%"=="1" goto classic_menu
+if "%opcion%"=="2" goto win11_menu
+echo Opcion no valida. Por favor, seleccione 1 o 2.
+pause
+goto menu
+
+:classic_menu
+reg add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve
+taskkill /f /im explorer.exe & start explorer.exe
+cls
+echo.
+echo  =============================================
+echo  |                                           |
+echo  |       LA OPCION 1 HA SIDO IMPLEMENTADA    |
+echo  |                                           |
+echo  =============================================
+echo.
+echo  El menu clasico de Windows 10 ha sido activado.
+echo  Si desea deshacer los cambios, seleccione la opcion 2.
+echo.
+pause
+goto menu
+
+:win11_menu
+reg delete "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}" /f
+taskkill /f /im explorer.exe & start explorer.exe
+cls
+echo.
+echo  =============================================
+echo  |                                           |
+echo  |       LA OPCION 2 HA SIDO IMPLEMENTADA    |
+echo  |                                           |
+echo  =============================================
+echo.
+echo  El menu de Windows 11 ha sido restaurado.
+echo  Si desea deshacer los cambios, seleccione la opcion 1.
+echo.
+pause
+goto menu
